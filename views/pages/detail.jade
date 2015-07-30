@@ -1,0 +1,16 @@
+extends ../layout
+block content
+    .container
+        .row
+            .col-md-7
+                embed(src="#{moive.flash}", allowFullScreen="true", width="720", height="600", type="application/x-shockwave-flash")
+            .col-md-5
+                dl.dl-horizontal
+                    dt 电影名字
+                    dd= moive.title
+                    dt 导演
+                    dd= moive.doc
+                    dt 国家
+                    dd= moive.country
+                    dt 语言
+                    dd= moive.language
