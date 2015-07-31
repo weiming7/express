@@ -146,7 +146,24 @@ UserSchema.methods = {
         bcrypt.compare(_password, this.password, function(err, isMatch) {
             if (err) return cb(err)
 
-            cb(null, isMatch)
+            cb(null, isMatch)  //就当有两个
         })
     }
 }
+
+
+
+user.comparePassword(password, function(err, isMatch) { //就当有两个
+    if (err) {
+        console.log(err)
+    }
+
+    if (isMatch) {
+        req.session.user = user
+
+        return res.redirect('/')
+    }
+    else {
+        return res.redirect('/signin')
+    }
+})
