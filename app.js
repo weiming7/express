@@ -6,11 +6,20 @@
 var express = require('express');
 var port = process.env.PORT || 3000;
 var app = express();
+var mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb://localhost/george')
+app.locals.moment = require('moment');
+
+moment(time).format('MM/DD/YYYY')
 
 app.set('views','./views/pages');
 app.set('view engine','jade');
 app.use(express.static(__dirname))
 app.listen(port);
+
+
 
 app.get('/',function(req,res){
     res.render('index',{
@@ -61,7 +70,7 @@ app.get('/movie/:id',function(req,res){
     });
 });
 
-
+//后台提交给新路由 new    保存后 跳转到 res.redirect   详情页
 app.get('/admin/movie',function(req,res){
     res.render('admin',{
         title:'后台录入页'
@@ -69,6 +78,8 @@ app.get('/admin/movie',function(req,res){
 });
 
 
+
+//list点击更新  提交update路由， 重新渲染 admin
 app.get('/admin/list',function(req,res){
     res.render('list',{
         title:'列表页',
